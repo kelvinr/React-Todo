@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import MobileTearSheet from '../layout/MobileTearSheet';
-import { List } from 'material-ui';
+import { List, ListItem, RaisedButton} from 'material-ui';
 
 export default class TodoLists extends React.Component {
   render() {
@@ -10,14 +10,20 @@ export default class TodoLists extends React.Component {
         <TodoList key={list.id} title={list.title} description={list.description} />
       ); 
     })
-    
-    console.log(lists);
+
     return (
       <MobileTearSheet>
-        <List subheader="Todo Lists">
+        <List>
           {lists}
+          <ListItem disabled={true} primaryText={
+            <RaisedButton 
+              label="New Todo List"
+              primary={true}
+              onClick={this.props.newList}/>}
+          />
         </List>
       </MobileTearSheet>
     );
   }
+
 };

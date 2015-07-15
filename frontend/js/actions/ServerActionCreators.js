@@ -1,13 +1,19 @@
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
-import TodoConstants from '../constants/TodoConstants';
+import { ActionTypes } from '../constants/TodoConstants';
 
-let ActionTypes = TodoConstants.ActionTypes;
 export default {
-
   receiveTodoLists(json) {
     TodoDispatcher.handleServerAction({
       type: ActionTypes.RECEIVE_TODO_LISTS,
       json: json
+    });
+  },
+
+  receiveCreatedTodoList(json, errors) {
+    TodoDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_CREATED_TODO_LIST,
+      json: json,
+      errors: errors
     });
   }
 };

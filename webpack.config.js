@@ -6,8 +6,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loader: 'babel' },
-      { test: /\.js$/, loader: 'babel' },
+      { test: /\.(jsx|js)$/, loader: 'babel', exclude: /node_modules/ },
+      { test: /\.css$/, loader: 'style!css' },
       { test: /\.sass$/, loader: 'style!css!sass?sourceMap&indentedSyntax' },
       { test: /\.svg$/, loader: 'url-loader' }  
     ]

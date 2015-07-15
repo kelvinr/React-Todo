@@ -1,12 +1,14 @@
 import React from 'react';
 import TodoListView from '../todo_lists/TodoListView';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { AppBar, AppCanvas, Styles } from 'material-ui';
-let { Colors, Typography } = Styles;
+import { AppBar, AppCanvas, MenuItem, LeftNav, Styles } from 'material-ui';
 let ThemeManager = new Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
+  }
 
   getChildContext() {
     return {
@@ -14,11 +16,18 @@ class App extends React.Component {
     };
   }
 
-  render() {
+  _onLeftIconButtonTouchTap() {
+    this.refs.leftNav.toggle();
+  }
 
+  render() {
     return (
       <AppCanvas>
-        <AppBar title="Todos" />
+        <AppBar 
+          title="Todos"
+          onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap} />
+
+        <LeftNav ref="leftNav" menuItems={[]} docked={false} />
         <TodoListView />
       </AppCanvas>
     );

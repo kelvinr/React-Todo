@@ -1,12 +1,12 @@
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
-import TodoConstants from '../constants/TodoConstants';
+import { ActionTypes } from '../constants/TodoConstants';
 import assign from 'object-assign';
 import { EventEmitter } from 'events';
 
-let ActionTypes = TodoConstants.ActionTypes;
 let CHANGE_EVENT = 'change';
 
 let _todo_lists = [];
+let _errors = [];
 
 let TodoListStore = assign({}, EventEmitter.prototype, {
 
@@ -34,6 +34,17 @@ TodoListStore.dispatchToken = TodoDispatcher.register( payload => {
 
     case ActionTypes.RECEIVE_TODO_LISTS:
       _todo_lists = action.json;
+      TodoListStore.emitChange();
+      break;
+
+    case ActionTypes.RECEIVE_CREATED_TODO_LIST:
+      if (action.json) {
+        _todo_lists.unshift(action.json);
+        _errors = [];
+      }
+      if (action.errors) {
+        _errors = action.errors;
+      }
       TodoListStore.emitChange();
       break;
   }

@@ -1,15 +1,21 @@
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
-import TodoConstants from '../constants/TodoConstants';
+import { ActionTypes } from '../constants/TodoConstants';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
-let ActionTypes = TodoConstants.ActionTypes;
-
 export default {
-
   loadTodoLists() {
     TodoDispatcher.handleViewAction({
       type: ActionTypes.LOAD_TODO_LISTS
     });
     WebAPIUtils.loadTodoLists();
+  },
+
+  createTodoList(title, description) {
+    TodoDispatcher.handleViewAction({
+      type: ActionTypes.CREATE_TODO_LIST,
+      title: title,
+      description: description
+    });
+    WebAPIUtils.createTodoList(title, description);
   }
 };

@@ -1,11 +1,8 @@
 import ServerActionCreators from '../actions/ServerActionCreators';
-import TodoConstants from '../constants/TodoConstants';
+import { APIEndpoints } from '../constants/TodoConstants';
 import request from 'superagent';
 
-let APIEndpoints = TodoConstants.APIEndpoints;
-
 export default {
-
   loadTodoLists() {
     request.get(APIEndpoints.TODO_LISTS)
       .set('Accept', 'application/json')
@@ -13,6 +10,23 @@ export default {
         if (res) {
           let json = JSON.parse(res.text);
           ServerActionCreators.receiveTodoLists(json);
+        }
+      });
+  },
+
+  createTodoList(title, description) {
+    request.post(APIEndpoints.TODO_LISTS)
+      .set('Accept', 'application/json')
+      .send({todo_list:{ title: title, description: description }})
+      .end((error, res) =>{
+        if (res) {
+          if (res.error) {
+            let errorMsgs = JSON.parse(res.text);
+            ServerActionCreators.receiveCreatedTodoList(null, errorMsgs);
+          } else {
+            let json = JSON.parse(res.text);
+            ServerActionCreators.receiveCreatedTodoList(json, null);
+          }
         }
       });
   }

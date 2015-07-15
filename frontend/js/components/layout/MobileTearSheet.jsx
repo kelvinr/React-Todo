@@ -1,20 +1,8 @@
-let React = require('react');
+import React from 'react';
 
-
-let MobileTearSheet = React.createClass({
-
-  propTypes: {
-    height: React.PropTypes.number
-  },
-
-  getDefaultProps() {
-    return {
-      height: 750
-    };
-  },
+export default class  MobileTearSheet extends React.Component {
 
   render() {
-
     let styles = {
       root: {
         margin: '2% auto',
@@ -44,7 +32,7 @@ let MobileTearSheet = React.createClass({
       </div>
     );
   }
+};
 
-});
-
-module.exports = MobileTearSheet;
+MobileTearSheet.propTypes = { height: React.PropTypes.number };
+MobileTearSheet.defaultProps = { height: 750 }

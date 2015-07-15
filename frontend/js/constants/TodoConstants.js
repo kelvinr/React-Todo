@@ -15,6 +15,8 @@ export default {
 
   ActionTypes: keyMirror({
     LOAD_TODO_LISTS: null,
-    RECEIVE_TODO_LISTS: null
+    RECEIVE_TODO_LISTS: null,
+    CREATE_TODO_LIST: null,
+    RECEIVE_CREATED_TODO_LIST: null
   })
 };
