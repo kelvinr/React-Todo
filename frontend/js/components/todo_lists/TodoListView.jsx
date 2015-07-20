@@ -2,8 +2,7 @@ import React from 'react';
 import TodoListStore from '../../stores/TodoListStore';
 import TodoListActionCreators from '../../actions/TodoListActionCreators';
 import TodoLists from './TodoLists';
-import { Dialog, Styles, FlatButton, TextField } from 'material-ui';
-let { Spacing, Typography } = Styles;
+import { Dialog, FlatButton, TextField } from 'material-ui';
 
 let methods = [
   '_onChange',
@@ -34,17 +33,7 @@ export default class TodoListView extends React.Component {
     this.setState({lists: TodoListStore.getAll()});
   }
 
-  getStyles() {
-    return {
-      root: {
-        paddingTop: Spacing.desktopKeylineIncrement
-      }
-    }
-  }
-
   render() {
-    let styles = this.getStyles();
-
     let formActions = [
       <FlatButton
         label="Cancel"
@@ -57,15 +46,15 @@ export default class TodoListView extends React.Component {
     ];
 
     return (
-      <div style={styles.root}>
+      <div>
         <TodoLists lists={this.state.lists} newList={this._newList}/>
         <Dialog
-         ref="ListForm"
-         title="New Todo List"
-         actions={formActions}
-         actionFocus="submit"
-         autoDetectWindowHeight={true}
-         autoScrollBodyContent={true}>
+          ref="ListForm"
+          title="New Todo List"
+          actions={formActions}
+          actionFocus="submit"
+          autoDetectWindowHeight={true}
+          autoScrollBodyContent={true}>
 
          <TextField floatingLabelText="Title" type="text" name="title" fullWidth={true} ref="title" />
          <TextField 
@@ -74,10 +63,9 @@ export default class TodoListView extends React.Component {
            multiLine={true}
            name="description"
            ref="description" />
-       </Dialog>
-
+         </Dialog>
       </div>
-    );
+      );
   }
 
   _newList() {

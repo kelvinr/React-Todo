@@ -4,6 +4,11 @@ class TodoListsController < ApiController
     render json: @todo_lists
   end
 
+  def show
+    @todo_list = TodoList.find(params[:id])
+    render json: [@todo_list, @todo_list.todo_items]
+  end
+
   def create
     @todo_list = TodoList.new(todo_list_params)
 

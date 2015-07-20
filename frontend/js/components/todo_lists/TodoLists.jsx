@@ -1,28 +1,32 @@
 import React from 'react';
 import TodoList from './TodoList';
-import MobileTearSheet from '../layout/MobileTearSheet';
-import { List, ListItem, RaisedButton} from 'material-ui';
+import { List, ListItem, RaisedButton, Paper} from 'material-ui';
 
 export default class TodoLists extends React.Component {
   render() {
     let lists = this.props.lists.map( list => {
       return (
-        <TodoList key={list.id} title={list.title} description={list.description} />
+        <TodoList key={list.id} id={list.id} title={list.title} description={list.description} />
       ); 
     })
 
     return (
-      <MobileTearSheet>
+      <Paper style={{
+        margin: '2% auto',
+        width: '80%'
+      }} zDepth={5}>
         <List>
+          <ListItem disabled={true}
+            primaryText={
+              <RaisedButton 
+                label="New Todo List"
+                primary={true}
+                onClick={this.props.newList}/>}
+              />
+
           {lists}
-          <ListItem disabled={true} primaryText={
-            <RaisedButton 
-              label="New Todo List"
-              primary={true}
-              onClick={this.props.newList}/>}
-          />
         </List>
-      </MobileTearSheet>
+     </Paper>
     );
   }
 

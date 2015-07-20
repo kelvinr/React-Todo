@@ -6,6 +6,8 @@ import { EventEmitter } from 'events';
 let CHANGE_EVENT = 'change';
 
 let _todo_lists = [];
+let _list = {}
+let _list_items = [];
 let _errors = [];
 
 let TodoListStore = assign({}, EventEmitter.prototype, {
@@ -24,6 +26,14 @@ let TodoListStore = assign({}, EventEmitter.prototype, {
 
   getAll() {
     return _todo_lists;
+  },
+
+  getList() {
+    return _list;
+  },
+
+  getItems() {
+    return _list_items;
   }
 });
 
@@ -47,7 +57,13 @@ TodoListStore.dispatchToken = TodoDispatcher.register( payload => {
       }
       TodoListStore.emitChange();
       break;
+
+    case ActionTypes.RECEIVE_LIST:
+      _list = action.json[0];
+      _list_items = action.json[1];
+      TodoListStore.emitChange();
   }
+
   return true;
 });
 

@@ -1,10 +1,13 @@
 import React from 'react';
 import TodoListView from '../todo_lists/TodoListView';
-import { AppBar, AppCanvas, MenuItem, LeftNav, Styles } from 'material-ui';
+import { AppBar, AppCanvas, Styles } from 'material-ui';
+import { RouteHandler } from 'react-router'
+
 let ThemeManager = new Styles.ThemeManager();
+let { Spacing, Typography } = Styles;
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
     this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
@@ -23,12 +26,12 @@ class App extends React.Component {
   render() {
     return (
       <AppCanvas>
-        <AppBar 
-          title="Todos"
-          onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap} />
+        <AppBar title="Todos" showMenuIconButton={false} />
 
-        <LeftNav ref="leftNav" menuItems={[]} docked={false} />
-        <TodoListView />
+        <div style={{paddingTop: Spacing.desktopKeylineIncrement}}>
+          <RouteHandler />
+        </div>
+
       </AppCanvas>
     );
   }
@@ -37,5 +40,3 @@ class App extends React.Component {
 App.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
-
-export { App as default };

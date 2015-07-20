@@ -1,5 +1,6 @@
 import React from 'react';
-import { Checkbox, ListItem } from 'material-ui';
+import { Checkbox, ListItem, rightIconMenu } from 'material-ui';
+import { Link } from 'react-router'
 
 export default class TodoList extends React.Component {
   constructor() {
@@ -26,7 +27,10 @@ export default class TodoList extends React.Component {
     let checked = this.state.checked ? styles.checked : {}; 
 
     return (
-      <ListItem style={checked} leftCheckbox={<Checkbox onCheck={this._onCheck}/>} primaryText={this.props.title} secondaryText={this.props.description} secondaryTextLines={2}/>
+      <ListItem style={checked} leftCheckbox={<Checkbox onCheck={this._onCheck} />}
+      primaryText={<Link to="list" params={{id: this.props.id}}>{this.props.title}</Link>}
+      secondaryText={this.props.description} secondaryTextLines={2}
+      />
     );
   }
 };

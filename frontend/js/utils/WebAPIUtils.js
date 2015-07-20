@@ -8,9 +8,17 @@ export default {
       .set('Accept', 'application/json')
       .end(function(error, res) {
         if (res) {
-          let json = JSON.parse(res.text);
-          ServerActionCreators.receiveTodoLists(json);
+          ServerActionCreators.receiveTodoLists(res.body);
         }
+      });
+  },
+
+  loadList() {
+    let path = window.location.pathname;
+    request.get(`${APIEndpoints.APIRoot}${path}`)
+      .set('Accept', 'application/json')
+      .end(function(error, res) {
+        ServerActionCreators.receiveList(res.body);
       });
   },
 
@@ -24,8 +32,7 @@ export default {
             let errorMsgs = JSON.parse(res.text);
             ServerActionCreators.receiveCreatedTodoList(null, errorMsgs);
           } else {
-            let json = JSON.parse(res.text);
-            ServerActionCreators.receiveCreatedTodoList(json, null);
+            ServerActionCreators.receiveCreatedTodoList(res.body, null);
           }
         }
       });

@@ -1,11 +1,12 @@
 import keyMirror from 'keymirror';
 
-let APIRoot = process.env.NODE_ENV === 'development' ? "http://localhost:3000": "";
+const ROOT = process.env.NODE_ENV === 'development' ? "http://localhost:3000": "";
 
 export default {
 
   APIEndpoints: {
-    TODO_LISTS: APIRoot + "/todo_lists"
+    APIRoot: ROOT,
+    TODO_LISTS: ROOT + "/todo_lists"
   },
 
   PayloadSources: keyMirror({
@@ -17,6 +18,8 @@ export default {
     LOAD_TODO_LISTS: null,
     RECEIVE_TODO_LISTS: null,
     CREATE_TODO_LIST: null,
-    RECEIVE_CREATED_TODO_LIST: null
+    RECEIVE_CREATED_TODO_LIST: null,
+    LOAD_LIST: null,
+    RECEIVE_LIST: null
   })
 };

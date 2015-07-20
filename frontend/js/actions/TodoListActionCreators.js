@@ -10,6 +10,13 @@ export default {
     WebAPIUtils.loadTodoLists();
   },
 
+  loadList() {
+    TodoDispatcher.handleViewAction({
+      type: ActionTypes.LOAD_LIST
+    });
+    WebAPIUtils.loadList();
+  },
+
   createTodoList(title, description) {
     TodoDispatcher.handleViewAction({
       type: ActionTypes.CREATE_TODO_LIST,

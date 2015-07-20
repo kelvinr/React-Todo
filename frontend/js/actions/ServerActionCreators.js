@@ -9,6 +9,13 @@ export default {
     });
   },
 
+  receiveList(json) {
+    TodoDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_LIST,
+      json: json
+    });
+  },
+
   receiveCreatedTodoList(json, errors) {
     TodoDispatcher.handleServerAction({
       type: ActionTypes.RECEIVE_CREATED_TODO_LIST,
