@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Todo Rails API using a React frontend",
   "scripts": {
-    "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors",
+    "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors --hot",
     "devbuild": "webpack -d --config webpack.dev.config.js --profile --progress --colors"
   },
   "author": "Kelvin R",
@@ -15,16 +15,21 @@
     "babel-core": "^5.6.15",
     "babel-loader": "^5.2.2",
     "babel-runtime": "^5.8.19",
-    "css-loader": "^0.15.1",
-    "file-loader": "^0.8.4",
+    "material-ui": "^0.10.2",
     "node-libs-browser": "^0.5.2",
     "node-sass": "^3.2.0",
     "react": "^0.13.3",
     "react-router": "1.0.0-beta2",
+    "react-tap-event-plugin": "^0.1.7",
     "redux": "^0.12.0",
-    "sass-loader": "^1.0.2",
+    "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.15.1",
+    "file-loader": "^0.8.4",
+    "react-hot-loader": "^1.2.8",
+    "sass-loader": "0.5",
     "style-loader": "^0.12.3",
-    "superagent": "^1.2.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.0"
   }

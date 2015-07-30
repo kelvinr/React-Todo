@@ -9,7 +9,7 @@ export default class List extends React.Component {
 
   render() {
     return (
-      <li>
+      <li className="collection-item">
         {this.props.list.title}
         <br />
         {this.props.list.description}

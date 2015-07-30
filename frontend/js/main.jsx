@@ -1,4 +1,3 @@
-import '../css/main.sass';
 import React from 'react';
 import { ROOT } from './constants';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
@@ -9,4 +8,4 @@ const history = ROOT === '' ?
   new BrowserHistory() : 
   new HashHistory()
 
-React.render(<Root history={history} />, document.getElementById('app'))
+React.render(<Root history={history} />, document.getElementById('app'));
