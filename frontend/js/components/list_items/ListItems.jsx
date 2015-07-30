@@ -1,6 +1,5 @@
 import React from 'react';
 import Item from './Item';
-import { List } from 'material-ui';
 
 export default class ListItems extends React.Component {
   render() {
@@ -12,9 +11,9 @@ export default class ListItems extends React.Component {
     });
 
     return (
-      <List>
+      <ul>
         {items}
-      </List>
-    )
+      </ul>
+    );
   }
 };

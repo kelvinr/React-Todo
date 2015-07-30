@@ -1,14 +1,12 @@
-require('../css/main.sass');
-
+import '../css/main.sass';
 import React from 'react';
-import Router from 'react-router';
-import routes from './routes.js';
+import { ROOT } from './constants';
+import BrowserHistory from 'react-router/lib/BrowserHistory';
+import HashHistory from 'react-router/lib/HashHistory';
+import Root from './Root';
 
-window = React.window;
+const history = ROOT === '' ?
+  new BrowserHistory() : 
+  new HashHistory()
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
-Router.run(routes, Router.HistoryLocation, function(Handler) {
-  React.render(<Handler />, document.body);
-});
+React.render(<Root history={history} />, document.getElementById('app'))
