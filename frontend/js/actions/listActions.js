@@ -29,6 +29,13 @@ function deletedList(id) {
   }
 };
 
+function updateList(list) {
+  return {
+    type: EDIT_LIST,
+    json: list
+  }
+};
+
 function createdItem(item) {
   return {
     type: CREATE_ITEM,
@@ -64,7 +71,7 @@ export function createList(title, description) {
   return dispatch => {
     request.post(`${ROOT}/todo_lists`)
     .set('Accept', 'application/json')
-    .send({todo_list:{ title: title, description: description }})
+    .send({todo_list: { title: title, description: description }})
     .end((error, res) => {
       if (res) {
         if (res.error) {
@@ -74,6 +81,21 @@ export function createList(title, description) {
         }
       }
     });
+  }
+};
+
+export function editList(id, title, description) {
+  return dispatch => {
+    request.put(`${ROOT}/todo_lists/${id}`)
+      .set('Accept', 'application/json')
+      .send({todo_list: { title: title, description: description}})
+      .end((error, res) => {
+        if (res.error) {
+          let errorMsgs = JSON.parse(res.text);
+        } else {
+          dispatch(updateList(res.body));
+        }
+      });
   }
 };
 

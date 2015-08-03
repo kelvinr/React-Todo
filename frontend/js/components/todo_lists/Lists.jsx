@@ -14,7 +14,7 @@ export default class Lists extends React.Component {
 
     let todoLists = lists.map( list => {
       return (
-        <TodoList key={list.id} list={list} actions={actions} />
+        <TodoList key={list.id} list={list} actions={actions} form={this.refs.ListForm} />
       ); 
     })
 

@@ -25,11 +25,11 @@ export default function lists(state = initialState, action) {
       }
 
     case EDIT_LIST:
-      return state.map(list =>
-        list.id === action.id ?
-          { ...list, title: action.title, description: action.description} :
-          list
-      );
+      let list = state.lists.filter(list => list.id === action.id)
+
+      return {
+        ...list, title: action.title, description: action.description
+      }
 
     case DELETE_LIST:
       return {
