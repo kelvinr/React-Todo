@@ -30,9 +30,12 @@ function deletedList(id) {
 };
 
 function updateList(list) {
+  let { id, title, description } = list;
   return {
     type: EDIT_LIST,
-    json: list
+    id: id,
+    title: title,
+    description: description
   }
 };
 

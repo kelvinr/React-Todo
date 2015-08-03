@@ -18,6 +18,7 @@ export default function lists(state = initialState, action) {
 
     case CREATE_LIST:
       return {
+        ...state,
         lists: [
           ...state.lists,
           action.json
@@ -25,10 +26,13 @@ export default function lists(state = initialState, action) {
       }
 
     case EDIT_LIST:
-      let list = state.lists.filter(list => list.id === action.id)
-
       return {
-        ...list, title: action.title, description: action.description
+        ...state,
+        lists : state.lists.map(list =>
+          list.id === action.id ?
+          { ...list, title: action.title, description: action.description } :
+          list
+        ) 
       }
 
     case DELETE_LIST:

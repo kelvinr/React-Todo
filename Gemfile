@@ -10,3 +10,7 @@ group :development do
   gem 'rack-cors', :require => 'rack/cors'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
