@@ -24,11 +24,11 @@
     "react-router": "1.0.0-beta2",
     "react-tap-event-plugin": "^0.1.7",
     "redux": "^0.12.0",
+    "extract-text-webpack-plugin": "^0.8.2",
     "superagent": "^1.2.0"
   },
   "devDependencies": {
     "css-loader": "^0.15.1",
-    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^1.2.8",
