@@ -1,12 +1,7 @@
 import React, { PropTypes } from 'react';
-import { AppBar, AppCanvas, Styles } from 'material-ui';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
-let ThemeManager = new Styles.ThemeManager();
-let { Spacing, Typography } = Styles;
-ThemeManager.setTheme(ThemeManager.types.LIGHT);
+import { Link } from 'react-router';
+import { AppBar, AppCanvas, Styles, FlatButton } from 'material-ui';
+let { Spacing } = Styles;
 
 export default class Application extends React.Component {
   
@@ -14,16 +9,10 @@ export default class Application extends React.Component {
     children: PropTypes.any
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  }
-
   render() {
     return (
       <AppCanvas>
-        <AppBar title="Todos" showMenuIconButton={false} />
+        <AppBar title="Todos" iconElementRight={<FlatButton linkButton={true} href="/" label="Back" />} />
 
         <div style={{paddingTop: Spacing.desktopKeylineIncrement}}>
           {this.props.children}
@@ -32,8 +21,4 @@ export default class Application extends React.Component {
       </AppCanvas>
     );
   }
-};
-
-Application.childContextTypes = {
-  muiTheme: PropTypes.object
 };

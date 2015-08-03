@@ -1,15 +1,27 @@
-import React from 'react';
-import ListItems from './ListItems';
+import React, { PropTypes } from 'react';
+import { connect } from 'redux/react';
+import { bindActionCreators } from 'redux';
+import * as ListActions from '../../actions/listActions';
+import Items from './Items';
+
+@connect(state => ({
+  list: state.lists.list,
+  items: state.lists.items
+}))
 
 export default class ListView extends React.Component {
-  constructor() {
-    super();
-    this._onChange = this._onChange.bind(this);
+
+  static propTypes = {
+    list: PropTypes.object.isRequired,
+    items: PropTypes.array.isRequired
   }
 
   render() {
+    const { list, items, dispatch } = this.props;
+    const actions = bindActionCreators(ListActions, dispatch);
+
     return (
-      <ListItems></ListItems>
+      <Items list={list} items={items} actions={actions} />
     );
   }
 };

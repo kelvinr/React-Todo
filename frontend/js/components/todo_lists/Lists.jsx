@@ -1,19 +1,90 @@
-import React from 'react';
-import List from './List';
+import React, { PropTypes } from 'react';
+import TodoList from './TodoList';
+import { Dialog, FlatButton, TextField, List, ListItem, RaisedButton, Paper } from 'material-ui';
 
 export default class Lists extends React.Component {
 
+  static propTypes = {
+    lists: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+  }
+
   render() {
-    let lists = this.props.lists.map( list => {
+    const { lists, actions } = this.props;
+
+    let todoLists = lists.map( list => {
       return (
-        <List key={list.id} list={list} />
+        <TodoList key={list.id} list={list} actions={actions} />
       ); 
     })
 
+    let formActions = [
+      <FlatButton
+        label="Cancel"
+        secondary={true}
+        onTouchTap={this._handleDialogCancel} />,
+      <FlatButton
+        label="Save"
+        primary={true}
+        onTouchTap={this._handleNewListSubmit} />
+    ];
+
+    let listForm = [
+      <Dialog
+        ref="ListForm"
+        title="New Todo List"
+        actions={formActions}
+        actionFocus="submit"
+        autoDetectWindowHeight={true}
+        autoScrollBodyContent={true}>
+
+        <TextField floatingLabelText="Title" type="text" name="title" fullWidth={true} ref="title" />
+        <TextField 
+          style={{minHeight: "200px"}}
+          floatingLabelText="Description"
+          fullWidth={true}
+          multiLine={true}
+          name="description"
+          ref="description" />
+      </Dialog>
+    ];
+
     return (
-      <ul>
-        {lists}
-      </ul>
+      <Paper style={{
+        margin: '2% auto',
+        width: '80%'
+      }} zDepth={5}>
+
+        {listForm}
+
+        <List>
+          <ListItem disabled={true}
+            primaryText={
+              <RaisedButton 
+                label="New Todo List"
+                primary={true}
+                onClick={this._newList}/>}
+          />
+
+          {todoLists}
+        </List>
+
+     </Paper>
     );
+  }
+
+  _newList = () => {
+    this.refs.ListForm.show();
+  }
+
+  _handleDialogCancel = () => {
+    this.refs.ListForm.dismiss();
+  }
+
+  _handleNewListSubmit = () => {
+    let title = this.refs.title.getValue();
+    let description = this.refs.description.getValue();
+    this.props.actions.createList(title, description);
+    this.refs.ListForm.dismiss();
   }
 };

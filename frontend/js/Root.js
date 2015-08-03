@@ -6,6 +6,11 @@ import { loadLists } from './actions/listActions';
 import * as components from './components';
 import * as stores from './reducers';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import mui from 'material-ui'
+let ThemeManager = new mui.Styles.ThemeManager();
+ThemeManager.setTheme(ThemeManager.types.LIGHT);
+
 const {
   Application,
   ListsView,
@@ -14,11 +19,18 @@ const {
 
 const redux = createRedux(stores);
 redux.dispatch(loadLists());
+injectTapEventPlugin();
 
 export default class Root extends React.Component {
 
   static propTypes = {
     history: PropTypes.object.isRequired
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
   }
 
   render() {
@@ -31,6 +43,10 @@ export default class Root extends React.Component {
     )
   }
 }
+
+Root.childContextTypes = {
+  muiTheme: PropTypes.object
+};
 
 function renderRoutes(history) {
   return (

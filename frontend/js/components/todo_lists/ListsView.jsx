@@ -4,20 +4,8 @@ import { connect } from 'redux/react';
 import * as ListActions from '../../actions/listActions';
 import Lists from './Lists';
 
-/*
-let methods = [
-  '_newList',
-  '_handleNewListSubmit',
-  '_handleDialogCancel'
-];
-
-methods.forEach( method => {
-this[method] = this[method].bind(this)
-});
-*/
-
 @connect(state => ({
-  lists: state.lists
+  lists: state.lists,
 }))
 
 export default class ListsView extends React.Component {
@@ -27,7 +15,7 @@ export default class ListsView extends React.Component {
   }
 
   render() {
-    const { lists: { lists } , dispatch } = this.props;
+    const { lists: { lists }, dispatch } = this.props;
     const actions = bindActionCreators(ListActions, dispatch);
 
     return (

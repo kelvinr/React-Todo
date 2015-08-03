@@ -19,6 +19,21 @@ class TodoListsController < ApiController
     end
   end
 
+  def update
+    todo_list = TodoList.find(params[:id])
+
+    if todo_list.update(todo_list_params) 
+      render json: todo_list
+    else
+      render json: todo_list.errors.full_messages
+    end
+  end
+
+  def destroy
+    todo_list = TodoList.find(params[:id])
+    render json: todo_list.id if todo_list.delete
+  end
+
   private
 
   def todo_list_params
