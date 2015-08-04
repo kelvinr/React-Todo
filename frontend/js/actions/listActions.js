@@ -1,4 +1,4 @@
-import { ROOT, LOAD_LISTS, CREATE_LIST, EDIT_LIST, DELETE_LIST, LOAD_LIST, CREATE_ITEM } from '../constants';
+import { ROOT, LOAD_LISTS, CREATE_LIST, EDIT_LIST, DELETE_LIST, LOAD_LIST, CREATE_ITEM, EDIT_ITEM, DELETE_ITEM } from '../constants';
 import request from 'superagent';
 
 function receiveLists(lists) {
@@ -43,6 +43,22 @@ function createdItem(item) {
   return {
     type: CREATE_ITEM,
     json: item
+  }
+};
+
+function deletedItem(id) {
+  return {
+    type: DELETE_ITEM,
+    id: id
+  }
+};
+
+function updateItem(item) {
+  let { id, content } = item;
+  return {
+    type: EDIT_ITEM,
+    id: id,
+    content: content
   }
 };
 
@@ -126,6 +142,33 @@ export function createItem(content, listId) {
           } else {
             dispatch(createdItem(res.body));
           }
+        }
+      });
+  }
+};
+
+export function deleteItem(id, listId) {
+  return dispatch => {
+    request.del(`${ROOT}/todo_lists/${listId}/todo_items/${id}`)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        if (res) {
+          dispatch(deletedItem(res.body));
+        }
+      });
+  }
+};
+
+export function editItem(id, listId, content) {
+  return dispatch => {
+    request.put(`${ROOT}/todo_lists/${listId}/todo_items/${id}`)
+      .set('Accept', 'application/json')
+      .send({todo_item: { content: content }})
+      .end((error, res) => {
+        if (res.error) {
+          let errorMsgs = JSON.parse(res.text);
+        } else {
+          dispatch(updateItem(res.body));
         }
       });
   }

@@ -29,10 +29,6 @@ class ListRow extends React.Component {
     }
   }
 
-  _onCheck = () => {
-    this.setState({checked: !this.state.checked});
-  }
-
   render() {
     const { id, title, description } = this.props;
 
@@ -49,7 +45,6 @@ class ListRow extends React.Component {
 
     let rightIconMenu = (
       <IconMenu iconButtonElement={iconButtonElement} onItemTouchTap={this._handleMenuClick}>
-        <MenuItem key="show">Show</MenuItem>
         <MenuItem key="edit">Edit</MenuItem>
         <MenuItem key="delete">Delete</MenuItem>
       </IconMenu>
@@ -70,14 +65,18 @@ class ListRow extends React.Component {
     );
   }
 
+  _onCheck = () => {
+    this.setState({checked: !this.state.checked});
+  }
+
   _handleMenuClick = (e, item) => {
-    const { actions, id, edit } = this.props
+    const { actions, id, edit } = this.props;
 
     if (item.key === "delete") {
      actions.deleteList(id) 
     } else if (item.key === "edit") {
       this.props.edit();
-    }
+    } 
   }
 
   _onClick = () => {
@@ -95,12 +94,12 @@ class EditRow extends React.Component {
   }
 
   render() {
-    let { id, title, description } = this.props;
+    const { id, title, description } = this.props;
 
     return (
       <div>
-        <TextField defaultValue={title} fullWidth={true} name="title" ref="title" />
-        <TextField defaultValue={description} fullWidth={true} name="description" multiLine={true} ref="desc" />
+        <TextField floatingLabelText="Title" defaultValue={title} fullWidth={true} name="title" ref="title" />
+        <TextField floatingLabelText="Description" defaultValue={description} fullWidth={true} name="description" multiLine={true} ref="desc" />
         <Snackbar message="Edit mode" action="Update" onActionTouchTap={this._handleUpdate} openOnMount={true} />
       </div>
     );
@@ -122,7 +121,7 @@ export default class TodoList extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {edit: false}
+    this.state = {edit: false};
   }
 
   render() {

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :todo_lists, except: [:new, :edit] do
-    resources :todo_items
+    resources :todo_items, only: [:create, :update, :destroy]
   end
 
   get '*all', :to => 'todo_lists#index', :constraints => FormatTest.new(:html)

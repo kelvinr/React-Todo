@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, defaultProps } from 'react';
 import Item from './Item';
 import { Paper, List, ListItem, RaisedButton, FlatButton, Dialog, TextField } from 'material-ui';
 
@@ -13,9 +13,9 @@ export default class Items extends React.Component {
   render() {
     const { list, items, actions } = this.props;
 
-    let listItems = items.map( item => {
+    let listItems = items.map(item => {
       return (
-        <Item key={item.id} content={item.content} actions={actions} />
+        <Item key={item.id} id={item.id} listId={list.id} content={item.content} actions={actions} />
       )
     });
 
