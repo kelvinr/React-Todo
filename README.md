@@ -9,6 +9,7 @@
 - [ ] Add my JSONify module / Extract to gem
 - [ ] User Login / JWT ??
   - [ ] User Specific Lists / Items
+- [ ] Refactor
 
 ### Running Locally
 You will need both Ruby/Rails and Node
