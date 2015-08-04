@@ -20,7 +20,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('public/style.css')
+    new ExtractTextPlugin('style.css')
   ],
   module: {
     loaders: [

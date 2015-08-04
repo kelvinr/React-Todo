@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root 'todo_lists#index'
-
   class FormatTest
     attr_accessor :mime_type
 
@@ -13,9 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '*all', to: 'api#index', constraints: FormatTest.new(:html)
   resources :todo_lists, except: [:new, :edit] do
     resources :todo_items, only: [:create, :update, :destroy]
   end
-
-  get '*all', :to => 'todo_lists#index', :constraints => FormatTest.new(:html)
 end
