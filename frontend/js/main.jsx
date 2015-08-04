@@ -1,4 +1,4 @@
-import '../css/main.scss';
+require('../css/main.scss');
 import React from 'react';
 import { ROOT } from './constants';
 import BrowserHistory from 'react-router/lib/BrowserHistory';

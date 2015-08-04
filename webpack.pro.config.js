@@ -8,13 +8,6 @@ module.exports = {
     path: './public',
     filename: 'bundle.js'
   },
-  module: {
-    loaders: [
-      { test: /\.(jsx|js)$/, loader: 'babel', exclude: /node_modules/ },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass?sourceMap') },
-      { test: /\.svg$/, loader: 'url-loader' }  
-    ]
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -28,6 +21,13 @@ module.exports = {
     }),
     new ExtractTextPlugin('style.css')
   ],
+  module: {
+    loaders: [
+      { test: /\.(jsx|js)$/, loader: 'babel', exclude: /node_modules/ },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass?sourceMap') },
+      { test: /\.svg$/, loader: 'url-loader' }  
+    ]
+  },
   resolve: {
     extensions: ['', '.js', '.jsx']
   }
