@@ -1,4 +1,4 @@
-### React frontend, using Redux-flux implementation, backed by a Rails API.
+### React / React-router, using Redux-flux implementation, backed by a Rails API.
 
 **This is a WIP**
 
