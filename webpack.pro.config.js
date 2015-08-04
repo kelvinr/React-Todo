@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   entry: ['./frontend/js/main.jsx'],
   output: {
     path: './public',
@@ -19,7 +20,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('public/style.css')
   ],
   module: {
     loaders: [
