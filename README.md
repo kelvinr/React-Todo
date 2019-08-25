@@ -1,15 +1,6 @@
 ### React / React-router, using Redux-flux implementation, backed by a Rails API.
 
-**This is a WIP**
-
-#### TODO
-- [ ] Tests
-- [ ] Mark / Unmark All
-- [ ] Delete All Marked
-- [ ] Add my JSONify module / Extract to gem
-- [ ] User Login / JWT ??
-  - [ ] User Specific Lists / Items
-- [ ] Refactor
+**This is now a very old project and thus will be archived, I will be posting a more up to date version shortly**
 
 ### Running Locally
 You will need both Ruby/Rails and Node
@@ -23,3 +14,7 @@ npm run devserve
 ```
 
 Navigate to localhost:8080
+
+### License
+
+This project is licensed under the MIT License
